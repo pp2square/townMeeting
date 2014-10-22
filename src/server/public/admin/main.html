@@ -1,0 +1,11 @@
+<div data-ui-view>
+    <tabset>
+        <tab
+            data-ng-repeat="t in tabs"
+            heading="{{t.heading}}"
+            select="go(t.route)"
+            active="t.active">
+        </tab>
+        </tabset>
+    <div data-ui-view='MainContents'></div>
+</div>

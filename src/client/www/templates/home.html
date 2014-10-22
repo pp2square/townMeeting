@@ -1,0 +1,33 @@
+<ion-view title="{{voteData.voteSubject}}">
+  <ion-nav-buttons>
+    <button class="button button-icon icon ion-close-circled" ng-click="doExit()"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="item in voteData.voteItems" ng-click="goVote({{item.id}})">
+        {{item.id}}. {{item.title}}
+      </ion-item>
+    </ion-list>
+    <div ng-show="alreadyVote" class="card ng-hide">
+      <div class="item item-text-wrap">
+        <br />
+        <h2 class="title" align="center">
+          투표를 완료하셨습니다.
+        </h2>
+        <br />
+        <button class="button button-block button-positive" ng-click="doExit()">종료하기</button>
+      </div>
+    </div>
+    <div ng-show="postFailed" class="card ng-hide">
+      <div class="item item-text-wrap">
+        <br />
+        <h2 class="title" align="center">
+          서버 접속에 오류가 있습니다.
+        </h2>
+        <br />
+        <button class="button button-block button-positive" ng-click="doRefresh()">재시도하기</button>
+        <button class="button button-block button-positive" ng-click="doExit()">종료하기</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

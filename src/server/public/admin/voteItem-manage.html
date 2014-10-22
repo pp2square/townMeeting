@@ -1,0 +1,91 @@
+<div data-ng-init="loadVoteItemList()" id='itemBody'>
+  <h2>VoteItem Manage</h2>
+  <div id='itemHeader'>
+    <div id='item-header-menu-new'>
+      <button data-ng-click="addNewVoteItem()">New VoteItem</button>
+      <modal-dialog class='itemModal' show='modalShown.addNew'>
+        <form novalidate class="simple-form">
+          <h2 class='modalTitle'>Add New Item</h2>
+          <table class='table addItemTable'>
+            <tr>
+              <td class='col-sm-1 ong-center-td'>Subject :</td>
+              <td><input type="text" data-ng-model="addVoteItem.subject" placeholder="Enter Topic Subject" autofocus="true" size='80' /></td>
+            </tr>
+            <tr data-ng-repeat="item in addVoteItem.newItems">
+              <td class='col-sm-1 ong-center-td'>Example {{$index + 1}}</td>
+              <td><input type="text" data-ng-model="item.itemTitle"  input-autofocus="$index == focusIndex" data-ng-required="true" size='80' /></td>
+            </tr>
+            <tr>
+              <td class='col-sm-1 ong-center-td'><button data-ng-click="addItem()">New Item</button></td>
+              <td class='col-sm-1 ong-center-td'><button data-ng-click="itemSave()">Save</button></td>
+            </tr>
+          </table>
+        </form>
+      </modal-dialog>
+    </div>
+    <div id='item-header-menu-refresh'>
+      <button data-ng-click="itemRefresh()">Refresh</button>
+    </div>
+  </div>
+
+  <div id="itemListMain">
+    <div id="selectGroup">
+      Group by:
+      <select data-ng-model="groupby">
+          <option value="voteDate">Date</option>
+          <option value="voteSubject">Subject</option>
+          <option value="itemStatus">Status</option>
+      </select>
+    </div>
+
+    <table data-ng-table="tableParams" class="table">
+        <tbody data-ng-repeat="group in $groups">
+        <tr class="ng-table-group">
+            <td colspan="{{$columns.length}}">
+                <a href="" data-ng-click="group.$hideRows = !group.$hideRows">
+                    <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                    <strong>{{ group.value }}</strong>
+                </a>
+            </td>
+        </tr>
+        <tr data-ng-hide="group.$hideRows" data-ng-repeat="user in group.data">
+            <td sortable="voteDate" data-title="''">
+            </td>
+            <td sortable="voteSubject" data-title="'Subject'" >
+                <a href="" data-ng-click="showItemDetail(user)">{{user.voteSubject}}</a>
+            </td>
+            <td sortable="itemStatus" data-title="'itemStatus'" class="col-sm-1 ong-center-td">
+                {{user.itemStatus}}
+            </td>
+            <td data-title="'Delete'" class="col-sm-1 ong-center-td">
+                <a href="" data-ng-show='allowDelete(user)' data-ng-click="deleteItem(user)">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+      <modal-dialog show='modalShown.itemDetail'>
+        <form novalidate class="simple-form">
+          <h2 class='modalTitle'>Item Detail</h2>
+          <table class='table itemDetailTable'>
+            <tr>
+              <td colspan='3' class='col-sm-1 ong-center-td itemSubject'>
+                {{viewDetail.voteSubject}}
+              </td>
+            </tr>
+            <tr data-ng-repeat="item in viewDetail.voteItems">
+              <td class='col-sm-1 ong-center-td'>Example {{$index + 1}}</td>
+              <td><input type="text" ng-readonly="!viewDetailStatus.itemEditable" input-autofocus="$index == focusIndex" data-ng-model="item.title" value='{{item.title}}' size='80' />
+              <td class='itemCountDisp'>{{item.count}}</td>
+            </tr>
+            <tr>
+              <td class='col-sm-1 ong-center-td'><button data-ng-show='viewDetailStatus.allowChange' data-ng-click="changeItemStatus()">{{curItem.itemStatus}}</button></td>
+              <td colspan='2' class='col-sm-1 ong-center-td'><button data-ng-show='viewDetailStatus.allowEdit' data-ng-click="itemUpdate()">{{viewDetailStatus.buttonTitle}}</button></td>
+            </tr>
+          </table>
+        </form>
+      </modal-dialog>
+    </div>
+  </div>
+</div>

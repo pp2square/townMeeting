@@ -1,0 +1,65 @@
+#itemBody {
+  padding: 10px;
+  margine: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#itemHeader {
+    padding: 0px;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+    width: 100%;
+    float: left;
+}
+
+#itemHeader > div {
+    background-color: #eeeeee;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+#item2 {
+    background-color: #ffffff;
+    clear: both;
+}
+
+#item2 > div {
+    background-color: #eeeeee;
+}
+
+.ng-table {
+  margin-top: 10px;
+  border: 1px solid #000;
+}
+
+.ong-center-td {
+  text-align: center;
+}
+
+.itemModal > div {
+  overflow: auto;
+}
+
+.modalTitle {
+  text-align: center;
+}
+
+.addItemTable {
+}
+
+.itemCountDisp {
+  color: blue;
+  font-weight: bold;
+}
+
+input[readonly="readonly"]
+{
+  border:0;
+}
+
+
+.itemSubject {
+  font-weight: bold;
+  font-size: 24px;
+}
